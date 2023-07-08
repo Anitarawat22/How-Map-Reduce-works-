@@ -1,0 +1,60 @@
+
+
+MAP-REDUCE
+Map-reduce is the component of Hadoop and a combination of two map and reduce .Map takes input as (k , v) key-value and give output as (k , v)key-value. Map-reduce is a programming paradigm.
+
+What is Map activity? let say a user is sitting here and this user has written a map-reduce code now what happens the code will reach and transfer in each block (b1, b2, b3, b4) and the code will run on that machine. when a code runs on the machine it means mapper is running . All of this 4 machine work in parallel but work on the different blocks of data . Here, data node  are (DN1 ,DN2 , DN3,DN4). As the user will be sending the code to the machine so the code is going to the data. Code is generally very small but data is big so it easy to transfer code to the data. This is called  principal of data locality. It means the data is processed on the same machine where it is kept.
+
+If the file size is 500 mb then blocks are 4 so, the 4 mapper will run.
+
+The output from mapper is not the final output but it is an intermediate output which will help us to get to our result quickly The output of all the mappers go to one other machine where reduce activity will take place.
+
+Map-reduce works like :
+   
+Let say you have  a file1(500 mb) andThe file has something like  
+            
+The ouput frequency of each word 
+( hello ,3)
+(name,1)
+(data, 20) 
+500 mb will be divided into 4 blocks 
+Record Reader : load data from its source and it converts the data into key-value pairs suitable for reading by the mapper.
+(0, hello, my name is Anita.)
+(1,I love to teach  and play with data.)
+(2, Data is quite interactive .)
+
+OUTPUT From mapper will be
+(hello ,1)
+(my ,1)
+(name ,1)
+(is ,1)
+(Anita ,1)
+
+Now the mapper output will be shuffled and brought to another machine .
+(hello ,1)
+(my ,1)
+(name ,1)
+(is ,1)
+(Anita ,1)
+(I ,1 )
+( love ,1 )
+(to ,1)
+(teach ,1)
+( and ,1 )
+( play ,1) 
+This are the key value  pair and is now brought for sorting(sorting means same key will come together)
+
+(hello ,1)
+(hello ,1)
+(hello ,1)
+(name,1)
+(data ,1)
+(data ,1)
+(data ,1)
+
+After shuffling and sorting ,Reduce will happen
+Reduce code takes the list of values and sums it up 
+(hello,{3})
+(name, {1})
+(data ,{3})
+
